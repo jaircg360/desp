@@ -1,29 +1,41 @@
-# Usar una versión de Python compatible con mediapipe
+# Usa Python 3.10 slim
 FROM python:3.10-slim
 
-# Evitar buffering de stdout/stderr
-ENV PYTHONUNBUFFERED=1
+# Configura variables de entorno
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Directorio de trabajo dentro del contenedor
-WORKDIR /app
-
-# Copiar los requirements
-COPY app/requirements.txt .
-
-# Instalar dependencias del sistema necesarias para OpenCV/mediapipe
-RUN apt-get update && apt-get install -y \
+# Instala dependencias del sistema necesarias
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
-    libgl1-mesa-glx \
+    pkg-config \
+    libjpeg-dev \
+    libpng-dev \
     libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalar dependencias de Python
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# Establece el directorio de trabajo
+WORKDIR /app
 
-# Copiar todo el backend al contenedor
+# Copia el requirements.txt
+COPY app/requirements.txt .
+
+# Instala las dependencias de Python
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia todo el contenido de la app
 COPY app/ .
 
-# Comando para iniciar tu app en Render
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "10000"]
+# Expone el puerto que usa FastAPI
+EXPOSE 8000
+
+# Comando para iniciar la aplicación con uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
