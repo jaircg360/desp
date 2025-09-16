@@ -23,6 +23,10 @@ export default function Dashboard({ onModelsUpdate }) {
   const [activeTab, setActiveTab] = useState('capture');
   const [isDetectingHand, setIsDetectingHand] = useState(false);
 
+  const API_BASE_URL = process.env.NODE_ENV === 'production' 
+    ? 'https://desp-1.onrender.com'  // Reemplaza con tu URL de backend en Render
+    : 'http://127.0.0.1:8000';
+
   // Limpiar mensajes después de un tiempo
   useEffect(() => {
     if (error || success) {
