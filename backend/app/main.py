@@ -38,7 +38,7 @@ app = FastAPI(title="Hand Gesture Recognition API", version="1.0.0")
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://tu-app-frontend.render.com",  # Reemplaza con tu URL de frontend en Render
+    "https://desp-kcn0.onrender.com",  # Reemplaza con tu URL de frontend en Render
 ]
 
 app.add_middleware(
