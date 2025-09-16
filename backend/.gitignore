@@ -1,0 +1,57 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PyCharm / IDE
+.idea/
+.vscode/
+
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+
+# Backup files
+*.bak
+*.swp
+
+# SQLite database (si tienes alguna)
+*.sqlite3
+
+# Pip files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Coverage reports
+htmlcov/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pytest
+.pytest_cache/
+
+# FastAPI / Uvicorn temporary
+*.db
+*.sqlite
